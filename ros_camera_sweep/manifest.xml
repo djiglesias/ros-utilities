@@ -1,0 +1,17 @@
+<package>
+  <description brief="ros_camera_sweep">
+
+     ros_camera_sweep
+
+  </description>
+  <author>bob</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ros_camera_sweep</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+  <depend package="tf"/>
+
+</package>
+
+
