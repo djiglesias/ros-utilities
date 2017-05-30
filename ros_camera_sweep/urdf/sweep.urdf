@@ -15,12 +15,12 @@
   <joint name="camera_base_to_camera_link_joint" type="fixed">
     <parent link="camera_base"/>
     <child link="camera_link"/>
-    <origin xyz="0 0 0"/>
+    <origin xyz="-0.0364 0 0.0296"/>
   </joint>
 
   <link name="camera_link">
     <visual>
-      <origin rpy="0 0 0" xyz="0 -0.0364 -0.0296"/>
+      <origin rpy="1.5708 0 1.5708" xyz="-0.0296 0 -0.0364"/>
       <geometry>
         <mesh filename="package://ros_camera_sweep/meshes/camera.stl"/>
       </geometry>

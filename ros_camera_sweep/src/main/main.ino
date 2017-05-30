@@ -40,7 +40,7 @@
 *****************************************************************************/
 #include <ros.h>
 #include <ros/time.h>
-#include "tf/tf.h"
+#include "tf.h"
 #include <tf/transform_broadcaster.h>
 
 #include "CameraPan.h"
@@ -48,7 +48,7 @@
 #define RANGE  760
 #define PIN    2
 #define RATE   20
-#define RPM    5
+#define RPM    2
 
 CameraPan *camera;
 
@@ -106,7 +106,7 @@ SIGNAL(TIMER0_COMPA_vect)
   if ( currentMillis - last_interrupt_time > (1000L / RATE) )
   {
     // Update rotation angles.
-    t.transform.rotation = tf::createQuaternionFromRPY(camera->getAngle(), 0.0, 0.0);  
+    t.transform.rotation = tf::createQuaternionFromRPY(3.14159, camera->getAngle() - 1.5708, 1.5708);  
     t.header.stamp = nh.now();
     broadcaster.sendTransform(t);
 
