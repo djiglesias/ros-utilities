@@ -17,14 +17,21 @@ $ make
 ~~~
 
 ## Visualizing in RVIZ ##
+Visualizing the coordinates as two axes.
+~~~
+$ roslaunch ros_camera_sweep view.launch
+~~~
+Visualizing the coordinates as two *.stl models.
+~~~
+$ roslaunch ros_camera_sweep view.launch model:="true"
+~~~
+Visualizing the coordinates as two *.stl models with the depth point cloud from the Intel RealSense R200 depth camera.
 ~~~
 $ roslaunch ros_camera_sweep view.launch model:="true" camera:="true"
 ~~~
 
 ## Visualizing in RTABMAP ##
-~~~
-$ roslaunch ros_camera_sweep rtabmap.launch 
-~~~
+Soon to come.
 
 # Future Work ##
 This assembly is functional as a prototype but could be improved in many ways. For instance it could support multiple degrees of free to increase the field of view, contain a protective guard to protect the camera from dirt/dust, and could be more organized with the excessive amount of wiring needed. Feel free to fork this project and improve upon what I have done!
