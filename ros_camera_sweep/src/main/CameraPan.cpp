@@ -42,9 +42,7 @@
 
 
 /**************************************************************************//**
-* Constructors
-*
-* ...
+* Default Constructor
 *
 ******************************************************************************/
 CameraPan::CameraPan(): stepper(STEP_PER_REV, PIN_1, PIN_2, PIN_3, PIN_4),
@@ -68,28 +66,18 @@ CameraPan::CameraPan(int steps, int p1, int p2, int p3, int p4):
 /**************************************************************************//**
 * Initiate Camera
 *
-* ...
-* 
 ******************************************************************************/
 void CameraPan::initiate()
 {
-	// Zero the unit.
 	home();
-
-  // Update settings.
   calibrated = true;
   step_count = -STEP_LIMIT;
-
-	// Backtrack to clear limit switch.
-
 
 }
 
 
 /**************************************************************************//**
 * Set Stepper Speed
-*
-* ...
 * 
 ******************************************************************************/
 void CameraPan::setSpeed(byte rpm)
@@ -102,14 +90,11 @@ void CameraPan::setSpeed(byte rpm)
 /**************************************************************************//**
 * Get Camera Angle
 *
-* ...
-* 
 ******************************************************************************/
 float CameraPan::getAngle()
 {  
 	if (calibrated)
-		return (float(step_count) * (360.0 / 2048.0)) * PI / 180;
-	  //return float(step_count) * (360.0 / 2048.0);
+		return (float(step_count) * (360.0 / 2048.0)) * PI / 180; // Radians.
 	else
 		return NULL;
 
@@ -141,8 +126,6 @@ void CameraPan::interruptHandler()
 /**************************************************************************//**
 * Set Direction
 *
-* ...
-* 
 ******************************************************************************/
 void CameraPan::setDirection( Direction dir) {
   this->direction = dir;
@@ -150,10 +133,8 @@ void CameraPan::setDirection( Direction dir) {
 
 
 /**************************************************************************//**
-* Step
+* Step in Direction
 *
-* ...
-* 
 ******************************************************************************/
 void CameraPan::step( ) {
   if (direction == Direction::FORWARD) {
@@ -170,8 +151,6 @@ void CameraPan::step( ) {
 
 /**************************************************************************//**
 * Find Home
-*
-* ...
 * 
 ******************************************************************************/
 void CameraPan::home()

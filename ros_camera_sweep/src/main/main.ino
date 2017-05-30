@@ -1,7 +1,7 @@
 /**************************************************************************//**
   ROS NODE: CAMERA SWIVEL HOUSING
 
-  Sweeps an RGBD camera (Intel Realsense R200) through 140 degrees of motion
+  Sweeps an RGBD camera (Intel Realsense R200) through 130 degrees of motion
   while publishing the camera rotation to /tf through ROSSERIAL. Driven by
   a 32 step Kuman Stepper Motor with a gear ratio of 64 to provide 2048 steps
   per rotation. ULN2003APG motor driver chip.

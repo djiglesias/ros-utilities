@@ -1,8 +1,6 @@
 /**************************************************************************//**
-* CAMERA PAN CLASS: SWEEPING CAMERA MOUNT (180 DEGREES)
+* CAMERA PAN CLASS: SWEEPING CAMERA MOUNT (130 DEGREES)
 * 
-* 
-*
 * @author  Duncan Iglesias
 * @company Arkbro Inc.
 * @date    May 2017
