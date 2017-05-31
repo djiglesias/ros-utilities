@@ -28,17 +28,17 @@
 #define STEP_COUNT      32
 #define GEAR_RATIO      64
 #define STEP_PER_REV    2048
-#define STEP_LIMIT		  380
+#define STEP_LIMIT      380
 #define INTERRUPT_LIMIT 200
-#define STEPPER_RPM		  5 
+#define STEPPER_RPM     5 
 
-#define PIN_1			      8
-#define PIN_2 			    7
-#define PIN_3 			    6
-#define PIN_4			      5
+#define PIN_1           8
+#define PIN_2           7
+#define PIN_3           6
+#define PIN_4           5
 
-#define HOME 			      0
-#define BACKTRACK 		  80
+#define HOME            0
+#define BACKTRACK       80
 
 
 /**************************************************************************//**
@@ -96,7 +96,7 @@ float CameraPan::getAngle()
 	if (calibrated)
 		return (float(step_count) * (360.0 / 2048.0)) * PI / 180; // Radians.
 	else
-		return NULL;
+		return 0.00;
 
 }
 

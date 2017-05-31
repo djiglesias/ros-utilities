@@ -35,7 +35,7 @@
   @company Arkbro Inc.
   @date    May 2017
 
-  @link ...
+  @link https://www.instructables.com/id/Sweeping-Camera-Mount-ROS/
 
 *****************************************************************************/
 #include <ros.h>
@@ -70,16 +70,12 @@ void setup()
   // Launch ROS node and set parameters.
   nh.initNode();
   broadcaster.init(nh);
-  while(!nh.connected()) {nh.spinOnce();}
   
   // Set pin modes for interrupt.
   camera = new CameraPan();
+  camera->setSpeed(RPM);
   pinMode(PIN, INPUT);
   attachInterrupt(digitalPinToInterrupt(PIN), interrupt, RISING);
-
-  // Initiate camera.
-  camera->setSpeed(RPM);
-  camera->initiate();
 
   // ROS Transform publisher.
   t.header.frame_id = "/camera_base";
@@ -91,6 +87,10 @@ void setup()
   // Attach interrupt.
   OCR0A = 0xAF;
   TIMSK0 |= _BV(OCIE0A);
+
+  // Delay until connected to ROS master.
+  while(!nh.connected()) {nh.spinOnce();}
+  camera->initiate();
 
 }
 
@@ -128,7 +128,7 @@ SIGNAL(TIMER0_COMPA_vect)
 ******************************************************************************/
 void loop() {
 
-  while (nh.connected()) {
+  if (nh.connected()) {
     camera->setDirection(CameraPan::Direction::FORWARD);
     for (int i = 0; i < RANGE; i++)
       camera->step();
