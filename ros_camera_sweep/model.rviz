@@ -30,8 +30,6 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: Image
-  - Class: crawler/Crawler
-    Name: Crawler
 Visualization Manager:
   Class: ""
   Displays:
@@ -180,8 +178,6 @@ Visualization Manager:
         Value: Orbit (rviz)
         Yaw: 2.42925
 Window Geometry:
-  Crawler:
-    collapsed: false
   Displays:
     collapsed: false
   Height: 1051

@@ -26,8 +26,6 @@ Panels:
     Name: Time
     SyncMode: 0
     SyncSource: ""
-  - Class: crawler/Crawler
-    Name: Crawler
 Visualization Manager:
   Class: ""
   Displays:
@@ -105,8 +103,6 @@ Visualization Manager:
       Yaw: 2.90926
     Saved: ~
 Window Geometry:
-  Crawler:
-    collapsed: false
   Displays:
     collapsed: false
   Height: 1028
