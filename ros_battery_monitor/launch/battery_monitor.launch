@@ -9,5 +9,4 @@
         <param name="baud" value="$(arg baud)"/>
     </node>
 
-
 </launch>
