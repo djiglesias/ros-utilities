@@ -87,9 +87,9 @@ void setup()
   // ROS Transform publisher.
   t.header.frame_id = "/camera_base";
   t.child_frame_id = "/camera_link";
-  t.transform.translation.x = 0.00;
-  t.transform.translation.y = 0.00;
-  t.transform.translation.z = 0.05;
+  t.transform.translation.x = 0.0000;
+  t.transform.translation.y = 0.0000;
+  t.transform.translation.z = 0.0296;
 
   // Attach interrupt.
   OCR0A = 0xAF;

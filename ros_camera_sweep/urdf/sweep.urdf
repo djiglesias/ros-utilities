@@ -1,0 +1,33 @@
+<robot name="camera_sweep">
+
+  <link name="camera_base">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.0364 0"/>
+      <geometry>
+        <mesh filename="package://ros_camera_sweep/meshes/frame.stl"/>
+      </geometry>
+      <material name="red">
+        <color rgba="0.8 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="camera_base_to_camera_link_joint" type="fixed">
+    <parent link="camera_base"/>
+    <child link="camera_link"/>
+    <origin xyz="0 0 0"/>
+  </joint>
+
+  <link name="camera_link">
+    <visual>
+      <origin rpy="0 0 0" xyz="0 -0.0364 -0.0296"/>
+      <geometry>
+        <mesh filename="package://ros_camera_sweep/meshes/camera.stl"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 .8 1"/>
+      </material>
+    </visual>
+  </link>
+
+</robot>
