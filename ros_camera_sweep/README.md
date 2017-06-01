@@ -1,6 +1,6 @@
 # ROS Camera Sweeping Assembly #
 ## Overview ##
-This project is intended to extend the functionality of an existing ROS robot by providing a stand alone platform to rotate an Intel RealSense R200 depth camera to increase its field of view. Using a stepper motor and an Arduino Nano, the camera can be rotated through a range of ~130 degrees and the position is published to /tf. For the full project breakdown visit the Instructables.com HERE. 
+This project is intended to extend the functionality of an existing ROS robot by providing a stand alone platform to rotate an Intel RealSense R200 depth camera to increase its field of view. Using a stepper motor and an Arduino Nano, the camera can be rotated through a range of ~130 degrees and the position is published to /tf. For the full project breakdown visit the Instructables.com [HERE](https://www.instructables.com/id/Sweeping-Camera-Mount-ROS/). 
 
 This project assumes that you already have the necessary dependancies installed. This include:
 - Realsense_camera
