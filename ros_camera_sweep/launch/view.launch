@@ -19,7 +19,7 @@
     		name="rviz" 
     		pkg="rviz" 
     		type="rviz" 
-    		args="-d $(find ros_camera_sweep)/axes.rviz" required="true"
+    		args="-d $(find ros_camera_sweep)/rviz/axes.rviz" required="true"
     	/>
 
     	<!-- With Camera Point Cloud -->
@@ -27,7 +27,7 @@
     		name="rviz" 
     		pkg="rviz" 
     		type="rviz" 
-    		args="-d $(find ros_camera_sweep)/axes.rviz" required="true"
+    		args="-d $(find ros_camera_sweep)/rviz/axes.rviz" required="true"
     	/>
 
     </group>
@@ -44,7 +44,7 @@
     		name="rviz" 
     		pkg="rviz" 
     		type="rviz" 
-    		args="-d $(find ros_camera_sweep)/model.rviz" required="true"
+    		args="-d $(find ros_camera_sweep)/rviz/model.rviz" required="true"
     	/>
 
     	<!-- With Camera Point Cloud -->
@@ -52,14 +52,14 @@
     		name="rviz" 
     		pkg="rviz" 
     		type="rviz" 
-    		args="-d $(find ros_camera_sweep)/model.rviz" required="true"
+    		args="-d $(find ros_camera_sweep)/rviz/model.rviz" required="true"
     	/>
 
     </group>
 
 
 	<!-- Launch RealSense Camera -->
-    
+    <include if="$(arg camera)" file="$(find realsense_camera)/launch/r200_nodelet_rgbd.launch"/>
     
 
 </launch>

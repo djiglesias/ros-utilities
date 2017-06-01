@@ -50,15 +50,12 @@
 #define RATE   20
 #define RPM    5
 
-// Instantiate CameraPan object.
 CameraPan *camera;
 
-// Setup ROS Node Handler.
 ros::NodeHandle  nh;
 geometry_msgs::TransformStamped t;
 tf::TransformBroadcaster broadcaster;
 
-// Global variables for runtime.
 unsigned long last_interrupt_time = millis();
 
 
@@ -104,7 +101,6 @@ void setup()
 SIGNAL(TIMER0_COMPA_vect)
 {
   unsigned long currentMillis = millis();
-
 
   // Debounce interrupt signal to avoid false positives.
   if ( currentMillis - last_interrupt_time > (1000L / RATE) )
