@@ -1,0 +1,64 @@
+<launch>
+
+	<!-- ROS Serial Arguments for Camera Sweep -->
+	<arg name="baud"               default="57600"                          />
+	<arg name="port"               default="/dev/ttyUSB0"                   />
+
+    <!-- RealSense R200 Arguments -->
+    <arg name="camera_type"        default="R200"                           />
+    <arg name="usb_port_id"        default=""                               />
+    <arg name="serial_no"          default=""                               />
+
+    <!-- RTABMAP Arguments -->
+    <arg name="frame_id"           default="camera_link"                    />
+    <arg name="namespace"          default="rtabmap"                        /> 
+    <arg name="database_path"      default="$(find ros_camera_sweep)/database/rtabmap.db" />
+    <arg name="rgb_topic"          default="/camera/rgb/image_rect_color"   />
+    <arg name="depth_topic"        default="/camera/depth_registered/sw_registered/image_rect_raw"  />
+    <arg name="camera_info_topic"  default="/camera/rgb/camera_info"        />
+    <arg name="visual_odometry"    default="true"                           />          
+    <arg name="odom_topic"         default="/odom"                          />
+    <arg name="rtabmap_args"       default=""                               />
+
+    <!-- Choose Visualization -->
+    <arg name="rtabmapviz"   default="true"                                 /> 
+    <arg name="rviz"         default="false"                                />
+
+    <!-- URDF File for Joint Description -->
+    <param 
+        name="robot_description" 
+        textfile="$(find ros_camera_sweep)/urdf/sweep.urdf"                />
+
+	<!-- Rosserial Node for Controlling Arduino -->
+	<node pkg="rosserial_python" type="serial_node.py" name="serial_node"   >
+        <param name="port" value="$(arg port)"                             />
+        <param name="baud" value="$(arg baud)"                             />
+
+    </node>
+
+    <!-- Launch RealSense Camera -->
+    <include file="$(find realsense_camera)/launch/r200_nodelet_rgbd.launch">
+        <arg name="camera_type"        value="$(arg camera_type)"          />
+        <arg name="serial_no"          value="$(arg serial_no)"            />
+        <arg name="usb_port_id"        value="$(arg usb_port_id)"          />        
+
+    </include>
+
+    <!-- Launch RTABMAP -->
+    <include file="$(find rtabmap_ros)/launch/rtabmap.launch"               >
+        <arg name="rviz"               value="$(arg rviz)"                 />
+        <arg name="rtabmapviz"         value="$(arg rtabmapviz)"           />
+
+        <arg name="frame_id"           value="$(arg frame_id)"             />
+        <arg name="namespace"          value="$(arg namespace)"            />
+        <arg name="database_path"      value="$(arg database_path)"        /> 
+        <arg name="rgb_topic"          value="$(arg rgb_topic)"            />
+        <arg name="depth_topic"        value="$(arg depth_topic)"          />
+        <arg name="camera_info_topic"  value="$(arg camera_info_topic)"    />
+        <arg name="visual_odometry"    value="$(arg visual_odometry)"      />
+        <arg name="odom_topic"         value="$(arg odom_topic)"           /> 
+        <arg name="rtabmap_args"       value="$(arg rtabmap_args)"         />         
+
+    </include>
+    
+</launch>
