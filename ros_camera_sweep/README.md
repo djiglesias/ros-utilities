@@ -31,7 +31,14 @@ $ roslaunch ros_camera_sweep view.launch model:="true" camera:="true"
 ~~~
 
 ## Visualizing in RTABMAP ##
-Soon to come.
+Launching with visual odometry enabled.
+~~~
+roslaunch ros_camera_sweep rtabmap.launch rtabmap_args:="-- delete_db_on_start"
+~~~
+Launching with custom odometry enabled.
+~~~
+roslaunch ros_camera_sweep rtabmap.launch rtabmap_args:="-- delete_db_on_start" visual_odometry:="false"
+~~~
 
 # Future Work ##
 This assembly is functional as a prototype but could be improved in many ways. For instance it could support multiple degrees of free to increase the field of view, contain a protective guard to protect the camera from dirt/dust, and could be more organized with the excessive amount of wiring needed. Feel free to fork this project and improve upon what I have done!

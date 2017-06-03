@@ -1,8 +1,8 @@
 <launch>
 
-	<!-- ROS Serial Arguments for Camera Sweep -->
-	<arg name="baud"               default="57600"                          />
-	<arg name="port"               default="/dev/ttyUSB0"                   />
+    <!-- ROS Serial Arguments for Camera Sweep -->
+    <arg name="baud"               default="57600"                          />
+    <arg name="port"               default="/dev/ttyUSB0"                   />
 
     <!-- RealSense R200 Arguments -->
     <arg name="camera_type"        default="R200"                           />
