@@ -1,0 +1,16 @@
+<package>
+  <description brief="ros_battery_monitor">
+
+     ros_battery_monitor
+
+  </description>
+  <author>crawler</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/ros_battery_monitor</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+
+</package>
+
+
