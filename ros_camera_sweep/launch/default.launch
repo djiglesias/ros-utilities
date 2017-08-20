@@ -1,0 +1,18 @@
+<launch>
+
+	<!-- Launch File Arguments -->
+    <arg name="package" default="camera_sweep"/>
+	<arg name="baud"    default="57600"       />
+	<arg name="port"    default="/dev/ttyUSB0"/>
+
+
+	<!-- Rosserial Node for Controlling Arduino -->
+	<node pkg="rosserial_python" type="serial_node.py" name="$(arg package)_node">
+        <param name="port" value="$(arg port)"/>
+        <param name="baud" value="$(arg baud)"/>
+    </node>
+
+	<!-- Upload URDF -->
+	<param name="robot_description" textfile="$(find ros_camera_sweep)/urdf/sweep.urdf" />
+    
+</launch>

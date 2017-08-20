@@ -1,10 +1,10 @@
 <launch>
 
 	<!-- Launch File Arguments -->
-	<arg name="baud"   default="57600"/>
+	<arg name="baud"   default="57600"       />
 	<arg name="port"   default="/dev/ttyUSB0"/>
-	<arg name="model"  default="false"/>
-	<arg name="camera" default="false"/>
+	<arg name="model"  default="false"       />
+	<arg name="camera" default="false"       />
 
 
 	<!-- Rosserial Node for Controlling Arduino -->

@@ -136,15 +136,17 @@ void CameraPan::setDirection( Direction dir) {
 * Step in Direction
 *
 ******************************************************************************/
-void CameraPan::step( ) {
+void CameraPan::step( int count ) {
   if (direction == Direction::FORWARD) {
     stepper.step(STEP);
-    step_count++;
+    if (count == 1)
+      step_count++;
   }
   else
   {
     stepper.step(-STEP);
-    step_count--;
+    if (count == 1)
+      step_count--;
   }
 }
 

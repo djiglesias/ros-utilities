@@ -12,13 +12,13 @@
     </visual>
   </link>
 
-  <joint name="camera_base_to_camera_link_joint" type="fixed">
+  <joint name="camera_base_to_camera_link_joint" type="floating">
     <parent link="camera_base"/>
-    <child link="camera_link"/>
+    <child link="camera_mount"/>
     <origin xyz="-0.0364 0 0.0296"/>
   </joint>
 
-  <link name="camera_link">
+  <link name="camera_mount">
     <visual>
       <origin rpy="1.5708 0 1.5708" xyz="-0.0296 0 -0.0364"/>
       <geometry>

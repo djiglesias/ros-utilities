@@ -27,7 +27,7 @@ public:
 	void  initiate();
 	float getAngle();
   void  setSpeed(byte rpm);
-  void  step();
+  void  step(int count);
 	void  interruptHandler();
   void  setDirection(Direction dir);
 

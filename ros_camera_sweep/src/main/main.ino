@@ -40,21 +40,23 @@
 *****************************************************************************/
 #include <ros.h>
 #include <ros/time.h>
-#include "tf.h"
-#include <tf/transform_broadcaster.h>
+#include <sensor_msgs/JointState.h>
 
 #include "CameraPan.h"
 
 #define RANGE  760
 #define PIN    2
 #define RATE   20
-#define RPM    2
+#define RPM    1
+
+#define LAG    30
 
 CameraPan *camera;
 
 ros::NodeHandle  nh;
-geometry_msgs::TransformStamped t;
-tf::TransformBroadcaster broadcaster;
+sensor_msgs::JointState joint_state;
+ros::Publisher joint_msg_pub("/joint_states", &joint_state);
+
 
 unsigned long last_interrupt_time = millis();
 
@@ -69,20 +71,22 @@ void setup()
 {
   // Launch ROS node and set parameters.
   nh.initNode();
-  broadcaster.init(nh);
+  nh.advertise(joint_msg_pub);
+
+  // Resize Joint State Message.
+  joint_state.name_length     = 1;
+  joint_state.position_length = 1;
   
+  joint_state.name     = new char*[1];
+  joint_state.position = new float[1];
+  char topic_name[]    = "camera_mount_joint";  
+  joint_state.name[0]  = topic_name;
+
   // Set pin modes for interrupt.
   camera = new CameraPan();
   camera->setSpeed(RPM);
   pinMode(PIN, INPUT);
-  attachInterrupt(digitalPinToInterrupt(PIN), interrupt, RISING);
-
-  // ROS Transform publisher.
-  t.header.frame_id = "/camera_base";
-  t.child_frame_id = "/camera_link";
-  t.transform.translation.x = 0.0000;
-  t.transform.translation.y = 0.0000;
-  t.transform.translation.z = 0.0296;
+  attachInterrupt(digitalPinToInterrupt(PIN), interrupt, RISING); 
 
   // Attach interrupt.
   OCR0A = 0xAF;
@@ -92,6 +96,17 @@ void setup()
   while(!nh.connected()) {nh.spinOnce();}
   camera->initiate();
 
+  // Reset lag occurance.
+  camera->setDirection(CameraPan::Direction::FORWARD);
+  for (int i = 0; i < LAG; i++)
+    camera->step(0);  
+  delay(100);
+  
+  camera->setDirection(CameraPan::Direction::BACKWARD);
+  for (int i = 0; i < LAG; i++)
+    camera->step(0);  
+  delay(100);
+  
 }
 
 
@@ -105,11 +120,12 @@ SIGNAL(TIMER0_COMPA_vect)
   // Debounce interrupt signal to avoid false positives.
   if ( currentMillis - last_interrupt_time > (1000L / RATE) )
   {
-    // Update rotation angles.
-    t.transform.rotation = tf::createQuaternionFromRPY(3.14159, camera->getAngle() - 1.5708, 1.5708);  
-    t.header.stamp = nh.now();
-    broadcaster.sendTransform(t);
+    // Update Joint State Parameters.
+    joint_state.header.stamp = nh.now();
+    joint_state.position[0]  = -camera->getAngle();// - 1.5708;
 
+    // Publish Joint State.
+    joint_msg_pub.publish( &joint_state );
     nh.spinOnce();
 
     // Update time.
@@ -130,16 +146,18 @@ void loop() {
 
   if (nh.connected()) {
     camera->setDirection(CameraPan::Direction::FORWARD);
-    for (int i = 0; i < RANGE; i++)
-      camera->step();
-  
-    delay(500);
+    for (int i = 0; i < LAG; i++)
+      camera->step(0);  
+    for (int i = 0; i < (RANGE - LAG); i++)
+      camera->step(1);
+    delay(250);
   
     camera->setDirection(CameraPan::Direction::BACKWARD);
-    for (int i = 0; i < RANGE; i++)
-      camera->step();
-  
-    delay(500);
+    for (int i = 0; i < LAG; i++)
+      camera->step(0);  
+    for (int i = 0; i < (RANGE - LAG); i++)
+      camera->step(1);
+    delay(250);
 
   }
 }

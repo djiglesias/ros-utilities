@@ -20,7 +20,7 @@ $ roslaunch ros_battery_monitor battery_monitor.launch &
 $ rostopic echo /battery/info
 ~~~
 
-# Future Work ##
+## Future Work ##
 This assembly is functional as a prototype but could be improved in many ways. For instance it could:
 - Support current draw monitoring to warn the user of current overdraw errors.
 - Utilize a 16 channel multiplexer for reading inputs of individual cells on a single pin.
